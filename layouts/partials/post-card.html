@@ -9,9 +9,14 @@
     </div>
     <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
     <p>{{ .Summary }}</p>
-    <div class="tag-list">
-      {{ range first 2 .Params.tags }}
-        <a href="/tags/{{ . | urlize }}/">#{{ . }}</a>
+    <div class="card-footer">
+      <div class="tag-list">
+        {{ range first 2 .Params.tags }}
+          <a href="/tags/{{ . | urlize }}/">#{{ . }}</a>
+        {{ end }}
+      </div>
+      {{ with .Params.country }}
+        <a class="country-badge" href="/countries/{{ . | urlize }}/">{{ . }}</a>
       {{ end }}
     </div>
   </div>

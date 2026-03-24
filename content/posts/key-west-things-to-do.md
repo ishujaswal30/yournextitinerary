@@ -1,17 +1,17 @@
 ---
 title: "Most Amazing Things to Do in Key West"
-date: 2023-03-20T09:00:00+00:00
+date: 2024-03-20T09:00:00+00:00
 draft: false
 summary: "America's southernmost city is unlike anywhere else in the country — part Caribbean island, part literary history, part endless sunset. Here's how to do it right."
 tags:
   - key-west
   - florida
   - beaches
-  - usa
   - island
+  - road-trip
 categories:
   - Journeys
-country: United States
+country: USA
 location: Key West, Florida
 cover: https://images.unsplash.com/photo-1548574505-5e239809ee19?w=1200&q=80
 ---

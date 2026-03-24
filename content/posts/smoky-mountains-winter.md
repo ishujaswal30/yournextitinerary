@@ -1,6 +1,6 @@
 ---
 title: "A Guide to the Beautiful White Smoky Mountains in Winter"
-date: 2022-01-18T09:00:00+00:00
+date: 2024-01-18T09:00:00+00:00
 draft: false
 summary: "Most people visit the Smokies in fall. But winter is when the mountains reveal something truly magical — snow-covered peaks, frozen waterfalls, and trails that feel like they belong to you alone."
 tags:
@@ -10,9 +10,10 @@ tags:
   - winter
   - hiking
   - ski
+  - mountains
 categories:
   - Journeys
-country: United States
+country: USA
 location: Great Smoky Mountains, Tennessee
 cover: https://images.unsplash.com/photo-1491555103944-7c647fd857e6?w=1200&q=80
 ---

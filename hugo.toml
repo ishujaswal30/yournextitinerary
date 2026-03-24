@@ -4,7 +4,7 @@ title = "Your next itinerary"
 [pagination]
   pagerSize = 6
 
-taxonomies = { tag = "tags", category = "categories" }
+taxonomies = { tag = "tags", category = "categories", country = "countries" }
 
 enableRobotsTXT = true
 

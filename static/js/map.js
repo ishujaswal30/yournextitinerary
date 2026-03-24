@@ -72,10 +72,11 @@
       )
       .join("");
 
+    const countrySlug = normalize(label).replace(/\s+/g, "-");
     details.innerHTML = `
       <div class="map-header">
         <h3>${escapeHtml(label)}</h3>
-        <span>${items.length} itineraries</span>
+        <a class="map-country-link" href="/countries/${countrySlug}/">${items.length} itineraries →</a>
       </div>
       <div class="map-posts">
         ${cards}

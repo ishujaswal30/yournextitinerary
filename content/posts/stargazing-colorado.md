@@ -1,6 +1,6 @@
 ---
 title: "Stargazing from a Beautiful Town in Colorado"
-date: 2023-08-10T09:00:00+00:00
+date: 2024-08-10T09:00:00+00:00
 draft: false
 summary: "High elevation, minimal light pollution, and skies so clear you can see the Milky Way with your naked eye — Colorado's mountain towns are among the best stargazing destinations in North America."
 tags:
@@ -11,7 +11,7 @@ tags:
   - night-sky
 categories:
   - Journeys
-country: United States
+country: USA
 location: Colorado
 cover: https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1200&q=80
 ---

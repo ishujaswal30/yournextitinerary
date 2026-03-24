@@ -1,6 +1,6 @@
 ---
 title: "Best Towns Near Chicago to See Fall Colors by Road"
-date: 2022-10-05T09:00:00+00:00
+date: 2024-10-05T09:00:00+00:00
 draft: false
 summary: "Five years of chasing fall foliage from Chicago — here are my favorite drives, towns, and hidden routes for the best autumn colors in the Midwest."
 tags:
@@ -10,9 +10,10 @@ tags:
   - road-trip
   - fall
   - foliage
+  - midwest
 categories:
   - Road Trips
-country: United States
+country: USA
 location: Chicago, Illinois
 cover: https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=1200&q=80
 ---

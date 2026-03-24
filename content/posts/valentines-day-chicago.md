@@ -1,6 +1,6 @@
 ---
 title: "How to Make Valentine's Day Special at Home in Chicago"
-date: 2022-02-10T09:00:00+00:00
+date: 2024-02-10T09:00:00+00:00
 draft: false
 summary: "Skip the overpriced restaurant rush. Chicago's best bakeries, pizzerias, and cocktail bars have everything you need to create an unforgettable Valentine's Day at home."
 tags:
@@ -9,9 +9,10 @@ tags:
   - food
   - date-night
   - local
+  - midwest
 categories:
   - City Guides
-country: United States
+country: USA
 location: Chicago, Illinois
 cover: https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=1200&q=80
 ---

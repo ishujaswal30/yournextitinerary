@@ -230,6 +230,45 @@ h3 {
   background: rgba(185, 214, 232, 0.35);
 }
 
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.card-footer .tag-list {
+  margin-top: 0;
+}
+
+.country-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(var(--accent-rgb, 185, 140, 100), 0.15);
+  color: var(--accent, #8B6347);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.country-badge:hover {
+  background: rgba(var(--accent-rgb, 185, 140, 100), 0.28);
+}
+
+.map-country-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent, #8B6347);
+  text-decoration: none;
+}
+
+.map-country-link:hover {
+  text-decoration: underline;
+}
+
 .split {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));

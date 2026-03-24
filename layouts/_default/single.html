@@ -12,6 +12,9 @@
       {{ range .Params.tags }}
         <a href="/tags/{{ . | urlize }}/">#{{ . }}</a>
       {{ end }}
+      {{ with .Params.country }}
+        <a class="country-badge" href="/countries/{{ . | urlize }}/">{{ . }}</a>
+      {{ end }}
     </div>
   </header>
   {{ with .Params.cover }}

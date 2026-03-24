@@ -10,16 +10,16 @@
     </div>
     <div class="hero-stats">
       <div>
-        <span class="stat-number">24</span>
-        <span class="stat-label">Cities</span>
+        <span class="stat-number">{{ len .Site.Taxonomies.countries }}</span>
+        <span class="stat-label">Countries</span>
       </div>
       <div>
-        <span class="stat-number">8</span>
+        <span class="stat-number">{{ len (where .Site.RegularPages "Section" "posts") }}</span>
         <span class="stat-label">Itineraries</span>
       </div>
       <div>
-        <span class="stat-number">45</span>
-        <span class="stat-label">Photo spots</span>
+        <span class="stat-number">{{ len .Site.Taxonomies.tags }}</span>
+        <span class="stat-label">Topics</span>
       </div>
     </div>
   </div>
@@ -45,6 +45,21 @@
   <div class="card-grid">
     {{ range first 3 (where .Site.RegularPages "Section" "posts") }}
       {{ partial "post-card.html" . }}
+    {{ end }}
+  </div>
+</section>
+
+<section class="section reveal">
+  <div class="section-heading">
+    <h2>Browse by country</h2>
+    <a href="/map/">View on map</a>
+  </div>
+  <div class="chip-grid">
+    {{ range $country, $list := .Site.Taxonomies.countries }}
+      <a class="chip-card" href="/countries/{{ $country | urlize }}/">
+        <span class="chip-title">{{ $country }}</span>
+        <span class="chip-meta">{{ len $list }} stories</span>
+      </a>
     {{ end }}
   </div>
 </section>
