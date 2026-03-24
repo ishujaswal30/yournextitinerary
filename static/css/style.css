@@ -347,6 +347,17 @@ h3 {
   display: none;
 }
 
+/* BUG 2 FIX: constrain inline images inside post body */
+.article-body img {
+  max-width: 100%;
+  width: auto;
+  max-height: 600px;
+  object-fit: contain;
+  display: block;
+  margin: 1.5rem auto;
+  border-radius: 8px;
+}
+
 .empty-state {
   font-style: italic;
 }
