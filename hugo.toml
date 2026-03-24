@@ -36,14 +36,18 @@ enableRobotsTXT = true
     url = "/"
     weight = 1
   [[menu.main]]
-    name = "Journal"
-    url = "/posts/"
+    name = "Destinations"
+    url = "/destinations/"
     weight = 2
   [[menu.main]]
     name = "Map"
     url = "/map/"
     weight = 3
   [[menu.main]]
+    name = "Travel Guides"
+    url = "/guides/"
+    weight = 4
+  [[menu.main]]
     name = "About"
     url = "/about/"
-    weight = 4
+    weight = 5
