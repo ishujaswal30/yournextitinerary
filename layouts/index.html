@@ -10,7 +10,7 @@
     </div>
     <div class="hero-stats">
       <div>
-        <span class="stat-number">{{ len .Site.Taxonomies.countries }}</span>
+        <span class="stat-number">{{ len (index .Site.Taxonomies "countries") }}</span>
         <span class="stat-label">Countries</span>
       </div>
       <div>
@@ -55,7 +55,7 @@
     <a href="/map/">View on map</a>
   </div>
   <div class="chip-grid">
-    {{ range $country, $list := .Site.Taxonomies.countries }}
+    {{ range $country, $list := (index .Site.Taxonomies "countries") }}
       <a class="chip-card" href="/countries/{{ $country | urlize }}/">
         <span class="chip-title">{{ $country }}</span>
         <span class="chip-meta">{{ len $list }} stories</span>
