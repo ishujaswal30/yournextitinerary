@@ -402,10 +402,21 @@ h3 {
   cursor: pointer;
 }
 
+.map-region.has-posts {
+  fill: rgba(185, 214, 232, 0.75);
+  stroke: rgba(21, 33, 47, 0.3);
+}
+
 .map-region.is-active,
 .map-region.is-selected {
-  fill: rgba(243, 184, 163, 0.7);
-  stroke: rgba(21, 33, 47, 0.35);
+  fill: rgba(243, 184, 163, 0.85);
+  stroke: rgba(21, 33, 47, 0.45);
+}
+
+.map-region.has-posts.is-active,
+.map-region.has-posts.is-selected {
+  fill: rgba(243, 184, 163, 0.85);
+  stroke: rgba(21, 33, 47, 0.45);
 }
 
 .map-tooltip {

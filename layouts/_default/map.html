@@ -15,13 +15,21 @@
     <h1>{{ .Title }}</h1>
     {{ with .Params.summary }}<p class="lead">{{ . }}</p>{{ end }}
   </div>
+  {{/* Fix A: count unique countries directly from post frontmatter */}}
+  {{ $countryList := slice }}
+  {{ range $posts }}
+    {{ if .Params.country }}
+      {{ $countryList = $countryList | append .Params.country }}
+    {{ end }}
+  {{ end }}
+  {{ $countryList = $countryList | uniq }}
   <div class="header-meta">
     <div>
       <span class="stat-number">{{ len $posts }}</span>
       <span class="stat-label">Stories</span>
     </div>
     <div>
-      <span class="stat-number">{{ len (index .Site.Taxonomies "countries") }}</span>
+      <span class="stat-number">{{ len $countryList }}</span>
       <span class="stat-label">Countries</span>
     </div>
   </div>
@@ -96,8 +104,17 @@
     {{ $mapPosts = $mapPosts | append (dict "title" .Title "url" .RelPermalink "summary" .Summary "cover" .Params.cover "date" (.Date.Format "Jan 2, 2006") "country" $country "country_key" (lower $country) "location" (.Params.location | default "") ) }}
   {{ end }}
 {{ end }}
+{{/* Fix B: pass countries-with-posts for map highlighting */}}
+{{ $cwp := slice }}
+{{ range $posts }}
+  {{ if .Params.country }}
+    {{ $cwp = $cwp | append .Params.country }}
+  {{ end }}
+{{ end }}
+{{ $cwp = $cwp | uniq }}
 <script>
   window.__mapPosts = {{ $mapPosts | jsonify | safeJS }};
+  window.__countriesWithPosts = {{ $cwp | jsonify | safeJS }};
 </script>
 <script src="/js/map.js" defer></script>
 {{ end }}

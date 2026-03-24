@@ -16,6 +16,12 @@
       posts = [];
     }
   }
+
+  // Fix B: normalize the list of countries that have posts for highlighting
+  const countriesWithPosts = (Array.isArray(window.__countriesWithPosts)
+    ? window.__countriesWithPosts
+    : []
+  ).map((c) => normalize(c));
   const normalize = (value) =>
     String(value || "")
       .trim()
@@ -171,9 +177,11 @@
         return;
       }
 
+      const countryKey = normalize(name);
+      const hasPosts = countriesWithPosts.includes(countryKey);
       path.setAttribute("d", d);
-      path.setAttribute("class", "map-region");
-      path.setAttribute("data-country", normalize(name));
+      path.setAttribute("class", hasPosts ? "map-region has-posts" : "map-region");
+      path.setAttribute("data-country", countryKey);
       path.setAttribute("data-label", name);
       mapSvg.appendChild(path);
     });
