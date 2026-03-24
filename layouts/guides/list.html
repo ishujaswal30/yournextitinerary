@@ -1,0 +1,73 @@
+{{ define "main" }}
+{{ $allPosts := where .Site.RegularPages "Section" "posts" }}
+{{ $guideCats := slice "Travel Tips" "City Guides" "Road Trips" "Guides" "Tips" "Itineraries" "Packing" }}
+
+{{ $guidePosts := slice }}
+{{ range $allPosts }}
+  {{ $post := . }}
+  {{ range .Params.categories }}
+    {{ if in $guideCats . }}
+      {{ $guidePosts = $guidePosts | append $post }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ $otherPosts := slice }}
+{{ range $allPosts }}
+  {{ $post := . }}
+  {{ $isGuide := false }}
+  {{ range .Params.categories }}
+    {{ if in $guideCats . }}
+      {{ $isGuide = true }}
+    {{ end }}
+  {{ end }}
+  {{ if not $isGuide }}
+    {{ $otherPosts = $otherPosts | append $post }}
+  {{ end }}
+{{ end }}
+
+<section class="page-header travel-header">
+  <div>
+    <p class="eyebrow">Resources</p>
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.description }}<p class="lead">{{ . }}</p>{{ end }}
+  </div>
+  <div class="header-meta">
+    <div>
+      <span class="stat-number">{{ len $allPosts }}</span>
+      <span class="stat-label">Guides</span>
+    </div>
+    <div>
+      <span class="stat-number">{{ len (index .Site.Taxonomies "tags") }}</span>
+      <span class="stat-label">Topics</span>
+    </div>
+  </div>
+</section>
+
+{{ if $guidePosts }}
+<section class="section reveal">
+  <div class="section-heading">
+    <h2>Tips & City Guides</h2>
+  </div>
+  <div class="card-grid">
+    {{ range $guidePosts }}
+      {{ partial "post-card.html" . }}
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+
+{{ if $otherPosts }}
+<section class="section reveal">
+  <div class="section-heading">
+    <h2>Journeys & Itineraries</h2>
+  </div>
+  <div class="card-grid">
+    {{ range $otherPosts }}
+      {{ partial "post-card.html" . }}
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+
+{{ end }}

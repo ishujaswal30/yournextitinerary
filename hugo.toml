@@ -10,7 +10,8 @@ enableRobotsTXT = true
 
 [params]
   description = "A travel journal of slow routes, vivid skies, and honest itineraries."
-  author = "YNI Travel Studio"
+  author = "Ishu Jaswal"
+  homepage_bio = "I'm Ishu — a Chicago-based data scientist and traveler who believes the best trips start with good research. This is where I share honest itineraries, practical tips, and the routes worth taking."
 
 [related]
   threshold = 80

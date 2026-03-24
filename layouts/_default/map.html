@@ -1,4 +1,14 @@
 {{ define "main" }}
+{{ $posts := where .Site.RegularPages "Section" "posts" }}
+
+{{ $regions := slice
+  (dict "name" "The Americas" "countries" (slice "USA" "Canada" "Mexico" "Brazil" "Argentina" "Colombia" "Peru" "Chile" "Cuba" "Costa Rica" "Panama" "Ecuador" "Bolivia" "Uruguay" "Venezuela" "Guatemala" "Honduras" "Jamaica" "Dominican Republic" "Trinidad and Tobago" "Barbados"))
+  (dict "name" "Europe" "countries" (slice "Italy" "France" "Spain" "Germany" "United Kingdom" "Portugal" "Greece" "Netherlands" "Switzerland" "Austria" "Sweden" "Norway" "Denmark" "Finland" "Poland" "Czech Republic" "Hungary" "Croatia" "Ireland" "Belgium" "Scotland" "England" "Wales" "Romania" "Bulgaria" "Serbia" "Slovakia" "Slovenia" "Estonia" "Latvia" "Lithuania" "Luxembourg" "Malta" "Cyprus" "Albania" "Montenegro" "Iceland" "Ukraine"))
+  (dict "name" "Asia" "countries" (slice "India" "Japan" "China" "Thailand" "Vietnam" "Indonesia" "Malaysia" "Singapore" "Philippines" "South Korea" "Taiwan" "Nepal" "Sri Lanka" "Bangladesh" "Pakistan" "Myanmar" "Cambodia" "Laos" "Mongolia" "Kazakhstan" "Uzbekistan" "Azerbaijan" "Armenia" "Georgia" "Bhutan" "Maldives" "Brunei"))
+  (dict "name" "Middle East & Africa" "countries" (slice "UAE" "Saudi Arabia" "Qatar" "Kuwait" "Bahrain" "Oman" "Jordan" "Israel" "Lebanon" "Turkey" "Egypt" "Morocco" "Tunisia" "Algeria" "South Africa" "Kenya" "Tanzania" "Ghana" "Nigeria" "Ethiopia" "Rwanda" "Uganda" "Senegal" "Mauritius"))
+  (dict "name" "Oceania" "countries" (slice "Australia" "New Zealand" "Fiji" "Papua New Guinea" "Samoa" "Tonga" "Vanuatu"))
+}}
+
 <section class="page-header travel-header">
   <div>
     <p class="eyebrow">Explore</p>
@@ -7,12 +17,12 @@
   </div>
   <div class="header-meta">
     <div>
-      <span class="stat-number">{{ len (where .Site.RegularPages "Section" "posts") }}</span>
+      <span class="stat-number">{{ len $posts }}</span>
       <span class="stat-label">Stories</span>
     </div>
     <div>
-      <span class="stat-number">{{ len .Site.Taxonomies.tags }}</span>
-      <span class="stat-label">Tags</span>
+      <span class="stat-number">{{ len (index .Site.Taxonomies "countries") }}</span>
+      <span class="stat-label">Countries</span>
     </div>
   </div>
 </section>
@@ -33,7 +43,45 @@
   </div>
 </section>
 
-{{ $posts := where .Site.RegularPages "Section" "posts" }}
+{{/* Where I've been — countries grouped by continent */}}
+{{ $visitedCountries := slice }}
+{{ range $posts }}
+  {{ with .Params.country }}
+    {{ $visitedCountries = $visitedCountries | append . }}
+  {{ end }}
+{{ end }}
+{{ $visitedCountries = $visitedCountries | uniq }}
+
+{{ if $visitedCountries }}
+<section class="section reveal">
+  <div class="section-heading">
+    <h2>Where I've been</h2>
+    <span>{{ len $visitedCountries }} {{ if eq (len $visitedCountries) 1 }}country{{ else }}countries{{ end }}</span>
+  </div>
+  <div class="split">
+    {{ range $regions }}
+      {{ $region := . }}
+      {{ $visited := slice }}
+      {{ range $visitedCountries }}
+        {{ if in $region.countries . }}
+          {{ $visited = $visited | append . }}
+        {{ end }}
+      {{ end }}
+      {{ if $visited }}
+      <div>
+        <p class="eyebrow">{{ $region.name }}</p>
+        <div class="tag-cloud" style="margin-top:10px;">
+          {{ range sort $visited }}
+            <a href="/countries/{{ . | urlize }}/">{{ . }}</a>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+
 {{ $mapPosts := slice }}
 {{ range $posts }}
   {{ $country := .Params.country | default "" }}

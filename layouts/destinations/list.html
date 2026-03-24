@@ -1,0 +1,53 @@
+{{ define "main" }}
+{{ $posts := where .Site.RegularPages "Section" "posts" }}
+
+{{ $regions := slice
+  (dict "name" "The Americas" "countries" (slice "USA" "Canada" "Mexico" "Brazil" "Argentina" "Colombia" "Peru" "Chile" "Cuba" "Costa Rica" "Panama" "Ecuador" "Bolivia" "Paraguay" "Uruguay" "Venezuela" "Guatemala" "Honduras" "El Salvador" "Nicaragua" "Jamaica" "Haiti" "Dominican Republic" "Trinidad and Tobago" "Barbados"))
+  (dict "name" "Europe" "countries" (slice "Italy" "France" "Spain" "Germany" "United Kingdom" "Portugal" "Greece" "Netherlands" "Switzerland" "Austria" "Sweden" "Norway" "Denmark" "Finland" "Poland" "Czech Republic" "Hungary" "Croatia" "Ireland" "Belgium" "Scotland" "England" "Wales" "Romania" "Bulgaria" "Serbia" "Slovakia" "Slovenia" "Estonia" "Latvia" "Lithuania" "Luxembourg" "Malta" "Cyprus" "Albania" "Montenegro" "Bosnia and Herzegovina" "North Macedonia" "Moldova" "Ukraine" "Iceland"))
+  (dict "name" "Asia" "countries" (slice "India" "Japan" "China" "Thailand" "Vietnam" "Indonesia" "Malaysia" "Singapore" "Philippines" "South Korea" "Taiwan" "Nepal" "Sri Lanka" "Bangladesh" "Pakistan" "Myanmar" "Cambodia" "Laos" "Mongolia" "Kazakhstan" "Uzbekistan" "Kyrgyzstan" "Tajikistan" "Turkmenistan" "Azerbaijan" "Armenia" "Georgia" "Bhutan" "Maldives" "Brunei" "Timor-Leste"))
+  (dict "name" "Middle East & Africa" "countries" (slice "UAE" "Saudi Arabia" "Qatar" "Kuwait" "Bahrain" "Oman" "Jordan" "Israel" "Lebanon" "Turkey" "Syria" "Iraq" "Iran" "Yemen" "Egypt" "Morocco" "Tunisia" "Algeria" "Libya" "South Africa" "Kenya" "Tanzania" "Ghana" "Nigeria" "Ethiopia" "Rwanda" "Uganda" "Senegal" "Ivory Coast" "Cameroon" "Mozambique" "Zimbabwe" "Zambia" "Botswana" "Namibia" "Madagascar" "Mauritius"))
+  (dict "name" "Oceania" "countries" (slice "Australia" "New Zealand" "Fiji" "Papua New Guinea" "Samoa" "Tonga" "Vanuatu" "Solomon Islands" "Kiribati" "Micronesia" "Palau" "Marshall Islands"))
+}}
+
+<section class="page-header travel-header">
+  <div>
+    <p class="eyebrow">Explore</p>
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.description }}<p class="lead">{{ . }}</p>{{ end }}
+  </div>
+  <div class="header-meta">
+    <div>
+      <span class="stat-number">{{ len $posts }}</span>
+      <span class="stat-label">Stories</span>
+    </div>
+    <div>
+      <span class="stat-number">{{ len (index .Site.Taxonomies "countries") }}</span>
+      <span class="stat-label">Countries</span>
+    </div>
+  </div>
+</section>
+
+{{ range $regions }}
+  {{ $region := . }}
+  {{ $regionPosts := slice }}
+  {{ range $posts }}
+    {{ if in $region.countries .Params.country }}
+      {{ $regionPosts = $regionPosts | append . }}
+    {{ end }}
+  {{ end }}
+  {{ if $regionPosts }}
+  <section class="section reveal" id="{{ $region.name | urlize }}">
+    <div class="section-heading">
+      <h2>{{ $region.name }}</h2>
+      <span>{{ len $regionPosts }} {{ if eq (len $regionPosts) 1 }}story{{ else }}stories{{ end }}</span>
+    </div>
+    <div class="card-grid">
+      {{ range $regionPosts }}
+        {{ partial "post-card.html" . }}
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+{{ end }}
+
+{{ end }}

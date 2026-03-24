@@ -1,12 +1,14 @@
 {{ define "main" }}
+
+{{/* Section A — Hero */}}
 <section class="hero">
   <div>
     <p class="eyebrow">Travel journal</p>
     <h1>{{ .Site.Title }}</h1>
     <p class="lead">{{ .Site.Params.description }}</p>
     <div class="hero-actions">
-      <a class="btn" href="/posts/">Explore routes</a>
-      <a class="btn ghost" href="/about/">Our travel story</a>
+      <a class="btn" href="/destinations/">Explore destinations</a>
+      <a class="btn ghost" href="/map/">View the map</a>
     </div>
     <div class="hero-stats">
       <div>
@@ -18,7 +20,7 @@
         <span class="stat-label">Itineraries</span>
       </div>
       <div>
-        <span class="stat-number">{{ len .Site.Taxonomies.tags }}</span>
+        <span class="stat-number">{{ len (index .Site.Taxonomies "tags") }}</span>
         <span class="stat-label">Topics</span>
       </div>
     </div>
@@ -37,10 +39,12 @@
     {{ end }}
   </div>
 </section>
+
+{{/* Section B — Featured Posts */}}
 <section class="section reveal">
   <div class="section-heading">
     <h2>Latest journeys</h2>
-    <a href="/posts/">View all</a>
+    <a href="/destinations/">View all</a>
   </div>
   <div class="card-grid">
     {{ range first 3 (where .Site.RegularPages "Section" "posts") }}
@@ -49,41 +53,48 @@
   </div>
 </section>
 
+{{/* Section C — Explore by Region */}}
 <section class="section reveal">
   <div class="section-heading">
-    <h2>Browse by country</h2>
-    <a href="/map/">View on map</a>
+    <h2>Explore by region</h2>
+    <a href="/destinations/">All destinations</a>
   </div>
   <div class="chip-grid">
-    {{ range $country, $list := (index .Site.Taxonomies "countries") }}
-      <a class="chip-card" href="/countries/{{ $country | urlize }}/">
-        <span class="chip-title">{{ $country }}</span>
-        <span class="chip-meta">{{ len $list }} stories</span>
-      </a>
-    {{ end }}
+    <a class="chip-card" href="/destinations/#the-americas">
+      <span class="chip-title">The Americas</span>
+      <span class="chip-meta">USA · Canada · Mexico</span>
+    </a>
+    <a class="chip-card" href="/destinations/#europe">
+      <span class="chip-title">Europe</span>
+      <span class="chip-meta">Italy · France · Spain</span>
+    </a>
+    <a class="chip-card" href="/destinations/#asia">
+      <span class="chip-title">Asia</span>
+      <span class="chip-meta">India · Japan · Thailand</span>
+    </a>
+    <a class="chip-card" href="/destinations/#middle-east--africa">
+      <span class="chip-title">Middle East & Africa</span>
+      <span class="chip-meta">UAE · Morocco · Kenya</span>
+    </a>
+    <a class="chip-card" href="/destinations/#oceania">
+      <span class="chip-title">Oceania</span>
+      <span class="chip-meta">Australia · New Zealand</span>
+    </a>
+    <a class="chip-card" href="/map/">
+      <span class="chip-title">View the map</span>
+      <span class="chip-meta">All countries →</span>
+    </a>
   </div>
 </section>
 
-<section class="section reveal">
-  <div class="section-heading">
-    <h2>Destinations & themes</h2>
-    <a href="/categories/">Browse categories</a>
-  </div>
-  <div class="chip-grid">
-    {{ range $cat, $list := .Site.Taxonomies.categories }}
-      <a class="chip-card" href="/categories/{{ $cat | urlize }}/">
-        <span class="chip-title">{{ $cat }}</span>
-        <span class="chip-meta">{{ len $list }} stories</span>
-      </a>
-    {{ end }}
-  </div>
-</section>
-
+{{/* Section D — About Snippet */}}
 <section class="section reveal">
   <div class="split">
     <div>
-      <h2>Tags & pathways</h2>
-      <p>Navigate by coastlines, mountains, food trails, and hidden lanes.</p>
+      <p class="eyebrow">About</p>
+      <h2>The person behind the routes</h2>
+      <p>{{ .Site.Params.homepage_bio }}</p>
+      <a class="btn ghost" href="/about/" style="display:inline-block;margin-top:16px;">Read more →</a>
     </div>
     <div class="tag-cloud">
       {{ range $tag, $list := .Site.Taxonomies.tags }}
@@ -92,4 +103,5 @@
     </div>
   </div>
 </section>
+
 {{ end }}
