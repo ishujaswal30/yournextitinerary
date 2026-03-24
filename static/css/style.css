@@ -342,6 +342,11 @@ h3 {
   margin: 0 0 16px;
 }
 
+/* BUG 1 FIX: hide duplicate cover image that opens post markdown content */
+.article-body > p:first-child:has(> img) {
+  display: none;
+}
+
 .empty-state {
   font-style: italic;
 }
